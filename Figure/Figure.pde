@@ -1,5 +1,6 @@
 //===========================================//
 //             Processing_Figure             //
+//                 11/21/16                  //
 //===========================================//
 //Draws a cat material figureat the specified// 
 //coordinates.                               //
@@ -26,25 +27,84 @@
 ///////////////////////////////////////////////
 
 
+Draw d = new Draw();  //creates a draw object "d"
 
-
-/*
->>>!!!!BROKEN CLASS!!!!<<<
-not possible to use size() in the specified format, oh well
-
-///Setup class
-///Handles canvas setup and sets initial drawing stroke
-class Setup
-{
-  void Set(int len,int wid, int w)
+  
+  
+void setup()  //sets up canvas
   {
-    size(len, wid);
-    strokeWeight(w);
+    size(500, 500);
+    strokeWeight(0);
+    background(255);
+    frameRate(144);
   }
-}
 
->>>!!!!!!!!!!!!!!!!!!!!!<<<
-*/
+
+ void draw()  //actually draws the kitty
+ {
+   
+   int x = 0; //x and why coordinates for the position of the entire image
+   int y = 0;
+ 
+   
+   
+   d.backgroundDraw(x,y);  //draws each component
+   
+     if (key == 'a') //selects which tail to draw
+   {
+     d.tailDraw1(x,y);
+   }
+   else if (key == 'w')
+   {
+     d.tailDraw2(x,y); 
+   }
+   else if (key =='d')
+   {
+      d.tailDraw3(x,y);
+   }
+
+    
+  
+  d.earLeftDraw(x,y);
+  d.bodyDraw(x,y);
+  d.headDraw(x,y);
+  d.earRightDraw(x,y);
+  d.feetDraw(x,y);
+  
+  
+  
+  if (mouseX <250)   //tells the kitty whereto look based on mouse location
+  {
+    x = -5;
+  }
+  else if (mouseX >250)
+  {
+    x = 5;
+  }
+  else
+  {
+   x = 0; 
+  }
+  
+    if (mouseY <250)
+  {
+    y = -5;
+  }
+  else if (mouseY >250)
+  {
+    y = 5;
+  }
+  else
+  {
+    y = 0;
+  }
+
+  d.faceDraw(x,y);
+  
+  
+  
+ }
+
 
 
 
@@ -129,17 +189,46 @@ class Draw
     ellipse(250+x,250+y,500,500);
   }
   
-  void tailDraw(int x,int y) //draws tail
+  void tailDraw1(int x,int y) //draws tail 1
   {
     c.tailColor();
     beginShape();
-    vertex(290+x,300+y);
+    vertex(290+x,300+y);       
     vertex(315+x,285+y);
     vertex(320+x,235+y);
     vertex(355+x,225+y);
     vertex(335+x,210+y);
     vertex(310+x,215+y);
     vertex(300+x,230+y);
+    vertex(310+x,275+y);
+    endShape();
+  }
+  
+    void tailDraw2(int x,int y) //draws tail 2
+  {
+    c.tailColor();
+    beginShape();
+    vertex(290+x,300+y);       
+    vertex(315+x,285+y);
+    vertex(320+x+10,235+y+10);
+    vertex(355+x+10,225+y+10);
+    vertex(335+x+10,210+y+10);
+    vertex(310+x+10,215+y+10);
+    vertex(300+x+10,230+y+10);
+    vertex(310+x,275+y);
+    endShape();
+  }
+    void tailDraw3(int x,int y) //draws tail 3
+  {
+    c.tailColor();
+    beginShape();
+    vertex(290+x,300+y);       
+    vertex(315+x,285+y);
+    vertex(320+x+30,235+y+30);
+    vertex(355+x+30,225+y+30);
+    vertex(335+x+30,210+y+30);
+    vertex(310+x+30,215+y+30);
+    vertex(300+x+30,230+y+30);
     vertex(310+x,275+y);
     endShape();
   }
@@ -183,26 +272,3 @@ class Draw
     arc(270+x,302+y,25,25,radians(180),radians(360));
   }
 }
-
-//===========================================//
-//  The actual picture drawing starts here!  //
-// V V V V V V V V V V V V V V V V V V V V V //
-//===========================================//
-
-int x = 0; //x and why coordinates for the position of the entire image
-int y = 0;
-
-Draw d = new Draw();  //creates a draw object "d"
-//Setup canvas = new Setup(); //part of a broken class, bleh
-
-size(500,500);  //adjust canvas size and stroke weight
-strokeWeight(0);
-
-d.backgroundDraw(x,y);  //draws each component
-d.tailDraw(x,y);
-d.earLeftDraw(x,y);
-d.bodyDraw(x,y);
-d.headDraw(x,y);
-d.faceDraw(x,y);
-d.earRightDraw(x,y);
-d.feetDraw(x,y);
